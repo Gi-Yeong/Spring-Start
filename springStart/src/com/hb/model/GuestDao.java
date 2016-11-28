@@ -2,7 +2,10 @@ package com.hb.model;
 
 import com.hb.util.OraDB;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -90,5 +93,47 @@ public class GuestDao {
         }
 
         return null;
+    }
+
+    public  void UpdateOne(GuestVo guestVo){
+        String sql = "UPDATE GUEST SET NAME = ?, PAY = ? WHERE SABUN = ?";
+        try {
+            conn = OraDB.getConn();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, guestVo.getName());
+            pstmt.setInt(2, guestVo.getPay());
+            pstmt.setInt(3, guestVo.getSabun());
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void deleteOne(int sabun) {
+        String sql = "DELETE FROM GUEST WHERE SABUN = ?";
+
+        try {
+            conn = OraDB.getConn();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, sabun);
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 }

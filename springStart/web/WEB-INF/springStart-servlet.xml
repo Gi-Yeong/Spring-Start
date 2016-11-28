@@ -21,6 +21,15 @@
     <bean name="/detail.do" class="com.hb.controller.DetailController">
         <property name="dao" ref="dao"/>
     </bean>
+    <bean name="/edit.do" class="com.hb.controller.EditController">
+        <property name="dao" ref="dao"/>
+    </bean>
+    <bean name="/update.do" class="com.hb.controller.EditController">
+        <property name="dao" ref="dao"/>
+    </bean>
+    <bean name="/del.do" class="com.hb.controller.DelController">
+        <property name="dao" ref="dao"/>
+    </bean>
     <!-- View 만 위임 할 때-->
     <bean name="/main2.do" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
         <property name="viewName" value="index"/>

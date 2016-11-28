@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 
 public class OraDB {
     private static Connection conn;
-    private static String url = "jdbc:oracle:thin:@localhost:1521:xe";
+    private static String url = "jdbc:oracle:thin:@192.168.0.29:1521:xe";
     private static String user = "scott";
     private static String password = "tiger";
 
