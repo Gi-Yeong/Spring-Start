@@ -1,27 +1,25 @@
 package com.hb.controller;
 
 import com.hb.model.GuestDao;
+import com.hb.model.GuestVo;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
-public class ListController implements Controller {
-    private GuestDao dao;
-
-    public void setDao(GuestDao dao) {
-        this.dao = dao;
-    }
-
+public class AddController implements Controller {
     @Override
     public ModelAndView handleRequest(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
-        List list = dao.selectAll();
-//        httpServletRequest.setAttribute("alist", list);
         ModelAndView mav = new ModelAndView();
-        mav.addObject("alist", list);
-        mav.setViewName("guest/list");
+        GuestDao dao = new GuestDao();
+        GuestVo bean = new GuestVo(Integer.parseInt(httpServletRequest.getParameter("sabun"))
+                , httpServletRequest.getParameter("name")
+                , null
+                , Integer.parseInt(httpServletRequest.getParameter("pay")));
+
+        dao.insertOne(bean);
+        mav.setViewName("redirect:/list.do");
 
         return mav;
     }

@@ -3,15 +3,24 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <!-- dao 객체 생성-->
+    <bean id="dao" class="com.hb.model.GuestDao"/>
+
     <!-- Handler Mapping-->
     <bean id="handlerMapping" class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
 
     <!-- Controller - Mapping-->
     <bean name="/main.do" class="com.hb.controller.IndexController"/>
-    <bean name="/list.do" class="com.hb.controller.ListController"/>
+    <bean name="/list.do" class="com.hb.controller.ListController">
+        <property name="dao" ref="dao"/>
+    </bean>
+    <bean name="/insert.do" class="com.hb.controller.AddController"/>
     <!-- View 만 위임 할 때-->
     <bean name="/main2.do" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
         <property name="viewName" value="index"/>
+    </bean>
+    <bean name="/add.do" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+        <property name="viewName" value="guest/addform"/>
     </bean>
 
     <!-- ViewResolver-->

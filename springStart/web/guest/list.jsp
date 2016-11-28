@@ -29,5 +29,8 @@
         </tr>
     </c:forEach>
 </table>
+<p>
+    <a href="add.do">입 력</a>
+</p>
 </body>
 </html>
