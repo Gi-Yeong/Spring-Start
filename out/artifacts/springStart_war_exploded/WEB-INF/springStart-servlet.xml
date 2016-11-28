@@ -8,6 +8,11 @@
 
     <!-- Controller - Mapping-->
     <bean name="/main.do" class="com.hb.controller.IndexController"/>
+    <bean name="/list.do" class="com.hb.controller.ListController"/>
+    <!-- View 만 위임 할 때-->
+    <bean name="/main2.do" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+        <property name="viewName" value="index"/>
+    </bean>
 
     <!-- ViewResolver-->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
