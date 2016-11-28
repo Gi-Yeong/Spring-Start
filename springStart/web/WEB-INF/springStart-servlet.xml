@@ -15,7 +15,12 @@
     <bean name="/list.do" class="com.hb.controller.ListController">
         <property name="dao" ref="dao"/>
     </bean>
-    <bean name="/insert.do" class="com.hb.controller.AddController"/>
+    <bean name="/insert.do" class="com.hb.controller.AddController">
+        <constructor-arg ref="dao"/>
+    </bean>
+    <bean name="/detail.do" class="com.hb.controller.DetailController">
+        <property name="dao" ref="dao"/>
+    </bean>
     <!-- View 만 위임 할 때-->
     <bean name="/main2.do" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
         <property name="viewName" value="index"/>

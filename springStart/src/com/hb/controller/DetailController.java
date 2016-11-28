@@ -8,23 +8,21 @@ import org.springframework.web.servlet.mvc.Controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class AddController implements Controller {
+public class DetailController implements Controller {
     private GuestDao dao;
 
-    public AddController(GuestDao dao) {
+    public void setDao(GuestDao dao) {
         this.dao = dao;
     }
 
     @Override
     public ModelAndView handleRequest(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
+        String param = httpServletRequest.getParameter("idx");
+        int sabun = Integer.parseInt(param);
         ModelAndView mav = new ModelAndView();
-        GuestVo bean = new GuestVo(Integer.parseInt(httpServletRequest.getParameter("sabun"))
-                , httpServletRequest.getParameter("name")
-                , null
-                , Integer.parseInt(httpServletRequest.getParameter("pay")));
-
-        dao.insertOne(bean);
-        mav.setViewName("redirect:/list.do");
+        GuestVo bean = dao.selectOne(sabun);
+        mav.addObject("dto", bean);
+        mav.setViewName("guest/detail");
 
         return mav;
     }
